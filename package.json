@@ -1,0 +1,37 @@
+{
+  "name": "fallacy-pib1",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "electron": "^1.4.14",
+    "foreman": "^3.0.1",
+    "react-scripts": "0.8.5"
+  },
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "main": "src/electron-starter.js",
+  "scripts": {
+    "dev": "nf start",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "electron-dev": "set ELECTRON_START_URL=http://localhost:3000 && electron ."
+  },
+  "homepage": "./",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
