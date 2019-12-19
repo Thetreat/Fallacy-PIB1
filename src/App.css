@@ -20,13 +20,14 @@ body {
   display: flex;
   flex: auto;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  align-content: center;
 }
 
 .FallacyCard {
   min-width: 200px;
   max-width: 400px;
-  background-color: rgb(45, 78, 78);
+  background-color: rgb(39, 44, 44);
   border-radius: 10px;
   padding: 20px;
   margin: 20px;
