@@ -1,4 +1,4 @@
-body h1 {
+#title {
   text-decoration: underline;
   text-align: center;
 }
@@ -20,29 +20,46 @@ body {
   display: flex;
   flex: auto;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-content: center;
 }
 
-.FallacyCard {
-  min-width: 200px;
-  max-width: 400px;
+.QuestionCard {
+  /* min-width: 200px; */
+  max-width: 50%;
   background-color: rgb(39, 44, 44);
   border-radius: 10px;
   padding: 20px;
-  margin: 20px;
+  /* margin: 20px; */
 }
-
-.FallacyCard h3 {
+@media (max-width:900px){
+  #title {
+    margin: 10px;
+  }
+  .centerCard h2 {
+    margin:10px;
+  }
+  .centerCard{
+    margin: 10px;
+    padding: 10px;
+  }
+  .QuestionCard {
+    max-width: 100%;
+  }
+  body {
+    padding: 0px;
+  }
+}
+.QuestionCard h3 {
   text-align: center;
 }
 
-.FallacyCard ul {
+.QuestionCard ul {
   list-style-type: upper-alpha;
   padding: 5px;
   margin-left: 50px;
 }
 
-.FallacyCard ul li {
+.QuestionCard ul li {
   margin-top: 5px;
 }
