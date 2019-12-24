@@ -34,6 +34,20 @@ body {
   margin-top:10px;
 }
 
+.QuestionCard h3 {
+  text-align: center;
+}
+
+.QuestionCard ul {
+  list-style-type: upper-alpha;
+  padding: 5px;
+  margin-left: 50px;
+}
+
+.QuestionCard ul li {
+  margin-top: 5px;
+}
+
 @media (max-width:900px){
   #title {
     margin: 10px;
@@ -54,17 +68,4 @@ body {
   body {
     padding: 0px;
   }
-}
-.QuestionCard h3 {
-  text-align: center;
-}
-
-.QuestionCard ul {
-  list-style-type: upper-alpha;
-  padding: 5px;
-  margin-left: 50px;
-}
-
-.QuestionCard ul li {
-  margin-top: 5px;
 }
