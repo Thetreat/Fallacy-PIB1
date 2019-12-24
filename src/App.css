@@ -17,21 +17,23 @@ body {
 }
 
 .FallacyContainer {
-  display: flex;
+  display: inline-flex;
   flex: auto;
-  flex-direction: row;
   justify-content: space-around;
-  align-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+  padding-top: -10px;
 }
 
 .QuestionCard {
-  /* min-width: 200px; */
-  max-width: 50%;
+  display: inline-table;
+  max-width: 35%;
   background-color: rgb(39, 44, 44);
   border-radius: 10px;
   padding: 20px;
-  /* margin: 20px; */
+  margin-top:10px;
 }
+
 @media (max-width:900px){
   #title {
     margin: 10px;
@@ -42,6 +44,9 @@ body {
   .centerCard{
     margin: 10px;
     padding: 10px;
+  }
+  .FallacyContainer {
+    gap: 20px;
   }
   .QuestionCard {
     max-width: 100%;
