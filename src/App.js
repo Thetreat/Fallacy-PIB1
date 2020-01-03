@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 
+import Grid from "@material-ui/core/Grid"
+
 import QuestionCard from "./QuestionCard"
 import FallacyPresentation from "./FallacyPresentation"
 
@@ -11,13 +13,13 @@ function App() {
       <header className="App-header">
         <div className="Body">
           <h1 id="title">Fallacier</h1>
-          <div className="centerCard">
+          <div>
             <h2>Choose a fallacy to start with:</h2>
-            <div className="FallacyContainer">
+            <Grid container direction="row" justify="center" alignItems="center" spacing={3}>
               <FallacyPresentation name="Cherry Picking" />
               <QuestionCard name="Simpson's paradox" />
               {/* <QuestionCard name="Slippery Slope" /> */}
-            </div>
+            </Grid>
           </div>
         </div>
       </header>

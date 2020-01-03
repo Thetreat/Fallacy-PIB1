@@ -4,8 +4,10 @@ import Button  from "@material-ui/core/Button"
 import Card from "@material-ui/core/Card" 
 import CardContent from "@material-ui/core/CardContent" 
 import CardActions from "@material-ui/core/CardActions" 
+import { Grid } from "@material-ui/core"
 
 class FallacyPresentation extends React.Component {
+
     fallacyDesc = {
         "Cherry Picking": {
             "Description": `Cherry picking is when you selectively pick out the evidence that backs up your point of view while disregarding the data that doesn’t.
@@ -23,31 +25,34 @@ class FallacyPresentation extends React.Component {
 
         this.Card = styled(Card)({
             background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-            border: 0,
             borderRadius: 3,
-            color: 'black',
+            color: 'white',
+            // width: "35%",
         })
         ;
     };
 
 
     render () {
-    return (<this.Card>
-                <CardContent>
-                    <h3>
-                    {this.props.name}
-                    </h3>
-                    <p>
-                    {this.description}
-                    </p>
-                    <br />
-                    <div>
-                        <p style={{"textDecoration":"underline"}}>Example :</p>
-                        <p>{this.example}</p>
-                    </div>
-                </CardContent>
-                <CardActions><Button variant="contained">Choose</Button></CardActions>
-            </this.Card>
+    return (
+    <Grid item xs>
+        <this.Card>
+            <CardContent>
+                <h3>
+                {this.props.name}
+                </h3>
+                <p>
+                {this.description}
+                </p>
+                <br />
+                <div>
+                    <p style={{"textDecoration":"underline"}}>Example :</p>
+                    <p>{this.example}</p>
+                </div>
+            </CardContent>
+            <CardActions><Button variant="contained">Choose</Button></CardActions>
+        </this.Card>
+    </Grid>
         )
     };
 }
