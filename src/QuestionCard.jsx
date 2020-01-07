@@ -49,7 +49,8 @@ class QuestionCard extends React.Component {
             answers.push(<FormControlLabel control={
                 <this.Checkbox color="default" value={"checked"+"ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i]}/>
                 }
-                label={answer}/>);
+                label={answer}
+                key={i}/>);
             i++
         });
         return answers;
@@ -74,7 +75,7 @@ class QuestionCard extends React.Component {
                             {
                                 this.constructAnswers()
                             }
-                        <Button variant="contained" color="#FF8E53">Validate</Button>
+                        <Button variant="contained">Validate</Button>
                         </FormGroup>
                     </CardActions>
                 </this.Card>
