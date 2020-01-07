@@ -3,48 +3,80 @@ import Draggable from "react-draggable"
 import Card from "@material-ui/core/Card"
 import CardContent from "@material-ui/core/CardContent"
 import { styled } from "@material-ui/core/styles"
-import { Grid } from "@material-ui/core"
+import { orange } from '@material-ui/core/colors';
+import { Grid, CardActions, Checkbox, FormGroup, FormControlLabel, Button, withStyles } from "@material-ui/core"
 
 class QuestionCard extends React.Component {
 
     constructor(props){
         super(props);
 
+        this.question = {
+            id: 0,
+            fallacy : "Cherry Picking",
+            type : "txt",
+            wording: "Which one of these fallacies is a cherry picking ?",
+            image : "",
+            answers : ["Maxime said analysis classes are hard. I find mine hard too. Therefore all analysis classes must be hard.",
+                        "I like chocolate donuts. Therefore all chocolate donuts are good.",
+                        "Spider-Man was bitten by a spider. If a spider bites me, I will become Spider-Man."
+            ],
+            solution: [0],
+            difficulty: 0.1
+        };
+
         this.Card = styled(Card)({
-            background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+            background: '#FF8E53 30%',
             borderRadius: 3,
             color: 'white',
         });
+
+        this.Checkbox = withStyles({
+            root: {
+              color: orange[900],
+              '&$checked': {
+                color: orange[900],
+              },
+            },
+            checked: {},
+          })(props => <Checkbox color="default" {...props} />);
     }
+
+    constructAnswers() {
+        var i = 0;
+        var answers = [];
+        this.question.answers.forEach(answer => {
+            answers.push(<FormControlLabel control={
+                <this.Checkbox color="default" value={"checked"+"ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i]}/>
+                }
+                label={answer}/>);
+            i++
+        });
+        return answers;
+    }
+
     render() {
       return (
-        <Grid item xs>
+        <Grid item xs={3}>
         <Draggable>
             <div>
                 <this.Card>
                     <CardContent>
                         <h3>
-                            {this.props.name}
+                            {this.question.fallacy}
                         </h3>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Aliquam at commodo turpis. Mauris eu neque consectetur nunc mollis bibendum non ut mi.
-                            Curabitur vitae dolor non orci auctor dapibus. Vestibulum imperdiet sodales hendrerit.
-                            Proin hendrerit elit felis, sed maximus ipsum fermentum sit amet.
-                            Aliquam et dolor pretium, malesuada sapien ut, pellentesque tellus.
-                            Nam molestie congue mauris, et commodo elit pretium ut.
-                            Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                            Sed facilisis imperdiet sapien vel viverra. Vestibulum lacinia pretium scelerisque.
-                            Fusce nec urna mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Aenean vitae nunc accumsan, vulputate urna nec, facilisis ex.
-                            Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                            {this.question.wording}
                         </p>
-                        <ul>
-                            <li>This is true</li>
-                            <li>This is false</li>
-                        </ul>
-                        <p><span style={{ "textDecoration": "underline" }}>Difficulty</span> : 0.5</p>
                     </CardContent>
+                    <CardActions>
+                        <FormGroup>
+                            {
+                                this.constructAnswers()
+                            }
+                        <Button variant="contained" color="#FF8E53">Validate</Button>
+                        </FormGroup>
+                    </CardActions>
                 </this.Card>
             </div>
         </Draggable>

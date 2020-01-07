@@ -24,10 +24,9 @@ class FallacyPresentation extends React.Component {
         this.example = this.fallacyDesc[this.props.name].Example;
 
         this.Card = styled(Card)({
-            background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+            background: '#FF8E53 30%',
             borderRadius: 3,
             color: 'white',
-            // width: "35%",
         })
         ;
     };
@@ -35,7 +34,7 @@ class FallacyPresentation extends React.Component {
 
     render () {
     return (
-    <Grid item xs>
+    <Grid item xs={3}>
         <this.Card>
             <CardContent>
                 <h3>
