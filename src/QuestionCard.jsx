@@ -33,9 +33,9 @@ class QuestionCard extends React.Component {
 
         this.Checkbox = withStyles({
             root: {
-              color: orange[900],
+              color: "#FFFFFF",
               '&$checked': {
-                color: orange[900],
+                color: "#FFFFFF",
               },
             },
             checked: {},
