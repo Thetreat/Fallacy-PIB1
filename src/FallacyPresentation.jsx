@@ -43,13 +43,12 @@ class FallacyPresentation extends React.Component {
                 <p>
                     {this.description}
                 </p>
-                <br />
                 <div>
                     <p style={{"textDecoration":"underline"}}>Example :</p>
                     <p>{this.example}</p>
                 </div>
             </CardContent>
-            <CardActions><Button variant="contained">Choose</Button></CardActions>
+            <CardActions style={{marginTop:-20}}><Button variant="contained">Choose</Button></CardActions>
         </this.Card>
     </Grid>
         )
