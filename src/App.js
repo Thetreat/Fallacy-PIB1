@@ -15,7 +15,7 @@ function App() {
           <h1 id="title">Fallacier</h1>
           <div>
             <h2>Choose a fallacy to start with:</h2>
-            <Grid container direction="row" justify="space-around" alignItems="center" spacing={3} >
+            <Grid container direction="row" justify="space-around" alignItems="center" spacing={1} >
               <FallacyPresentation name="Cherry Picking" />
               <QuestionCard name="Simpson's paradox" />
               {/* <QuestionCard name="Slippery Slope" /> */}

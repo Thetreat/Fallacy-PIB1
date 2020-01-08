@@ -34,14 +34,14 @@ class FallacyPresentation extends React.Component {
 
     render () {
     return (
-    <Grid item xs={3}>
+    <Grid item sm={5} md={4}>
         <this.Card>
             <CardContent>
                 <h3>
-                {this.props.name}
+                    {this.props.name}
                 </h3>
                 <p>
-                {this.description}
+                    {this.description}
                 </p>
                 <br />
                 <div>

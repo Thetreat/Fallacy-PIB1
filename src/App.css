@@ -1,11 +1,12 @@
 #title {
   text-decoration: underline;
   text-align: center;
+  margin-top: -10px;
 }
 body {
   background-color: rgb(42, 43, 48);
   color: rgb(170, 170, 170);
-  margin:0;
+  margin: 10px;
   padding: 10px;
 }
 
@@ -46,26 +47,4 @@ body {
 
 .QuestionCard ul li {
   margin-top: 5px;
-}
-
-@media (max-width:900px){
-  #title {
-    margin: 10px;
-  }
-  .centerCard h2 {
-    margin:10px;
-  }
-  .centerCard{
-    margin: 10px;
-    padding: 10px;
-  }
-  .FallacyContainer {
-    gap: 20px;
-  }
-  .QuestionCard {
-    max-width: 100%;
-  }
-  body {
-    padding: 0px;
-  }
 }

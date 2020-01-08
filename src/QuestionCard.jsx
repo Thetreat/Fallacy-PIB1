@@ -3,7 +3,6 @@ import Draggable from "react-draggable"
 import Card from "@material-ui/core/Card"
 import CardContent from "@material-ui/core/CardContent"
 import { styled } from "@material-ui/core/styles"
-import { orange } from '@material-ui/core/colors';
 import { Grid, CardActions, Checkbox, FormGroup, FormControlLabel, Button, withStyles } from "@material-ui/core"
 
 class QuestionCard extends React.Component {
@@ -50,40 +49,51 @@ class QuestionCard extends React.Component {
                 <this.Checkbox color="default" value={"checked"+"ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i]}/>
                 }
                 label={answer}
-                key={i}/>);
+                key={i}
+                style={{margin:5}}
+            />);
             i++
         });
         return answers;
     }
 
+    constructImage() {
+        if (this.question.image !== "") {
+            return <img src={this.question.image} alt="The problem"/>
+        }
+    }
+
     render() {
-      return (
-        <Grid item xs={3}>
-        <Draggable>
-            <div>
-                <this.Card>
-                    <CardContent>
-                        <h3>
-                            {this.question.fallacy}
-                        </h3>
-                        <p>
-                            {this.question.wording}
-                        </p>
-                    </CardContent>
-                    <CardActions>
-                        <FormGroup>
-                            {
-                                this.constructAnswers()
-                            }
-                        <Button variant="contained">Validate</Button>
-                        </FormGroup>
-                    </CardActions>
-                </this.Card>
-            </div>
-        </Draggable>
-        </Grid>
+        return (
+            <Grid item sm={5} md={4}>
+                <Draggable>
+                    <div>
+                        <this.Card>
+                            <CardContent>
+                                <h3>
+                                    {this.question.fallacy}
+                                </h3>
+                                <p>
+                                    {this.question.wording}
+                                </p>
+                                {
+                                    this.constructImage()
+                                }
+                            </CardContent>
+                            <CardActions>
+                                <FormGroup>
+                                    {
+                                        this.constructAnswers()
+                                    }
+                                <Button variant="contained" style={{marginTop:5}}>Validate</Button>
+                                </FormGroup>
+                            </CardActions>
+                        </this.Card>
+                    </div>
+                </Draggable>
+            </Grid>
         );
     };
-  }
+}
 
 export default QuestionCard
