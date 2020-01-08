@@ -80,7 +80,7 @@ class QuestionCard extends React.Component {
                                     this.constructImage()
                                 }
                             </CardContent>
-                            <CardActions>
+                            <CardActions style={{marginTop: -30}}>
                                 <FormGroup>
                                     {
                                         this.constructAnswers()
