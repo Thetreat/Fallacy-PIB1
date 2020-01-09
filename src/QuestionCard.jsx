@@ -7,28 +7,28 @@ import { Grid, CardActions, Checkbox, FormGroup, FormControlLabel, Button, withS
 
 class QuestionCard extends React.Component {
 
-    constructor(props){
-        super(props);
+	constructor(props) {
+		super(props);
 
-        this.question = {
-            id: 0,
-            fallacy : "Cherry Picking",
-            type : "txt",
-            wording: "Which one of these fallacies is a cherry picking ?",
-            image : "",
-            answers : ["Maxime said analysis classes are hard. I find mine hard too. Therefore all analysis classes must be hard.",
-                        "I like chocolate donuts. Therefore all chocolate donuts are good.",
-                        "Spider-Man was bitten by a spider. If a spider bites me, I will become Spider-Man."
-            ],
-            solution: [0],
-            difficulty: 0.1
-        };
+		this.question = {
+			id: 0,
+			fallacy: "Cherry Picking",
+			type: "txt",
+			wording: "Which one of these fallacies is a cherry picking ?",
+			image: "",
+			answers: ["Maxime said analysis classes are hard. I find mine hard too. Therefore all analysis classes must be hard.",
+				"I like chocolate donuts. Therefore all chocolate donuts are good.",
+				"Spider-Man was bitten by a spider. If a spider bites me, I will become Spider-Man."
+			],
+			solution: [0],
+			difficulty: 0.1
+		};
 
-        this.Card = styled(Card)({
-            background: '#FF8E53 30%',
-            borderRadius: 3,
-            color: 'white',
-        });
+		this.Card = styled(Card)({
+			background: '#FF8E53 30%',
+			borderRadius: 3,
+			color: 'white',
+		});
 
         this.Checkbox = withStyles({
             root: {
@@ -66,43 +66,43 @@ class QuestionCard extends React.Component {
         return answers;
     }
 
-    constructImage() {
-        if (this.question.image !== "") {
-            return <img src={this.question.image} alt="The problem"/>
-        }
-    }
+	constructImage() {
+		if (this.question.image !== "") {
+			return <img src={this.question.image} alt="The problem" />
+		}
+	}
 
-    render() {
-        return (
-            <Grid item sm={5} md={4}>
-                <Draggable>
-                    <div>
-                        <this.Card>
-                            <CardContent>
-                                <h3>
-                                    {this.question.fallacy}
-                                </h3>
-                                <p>
-                                    {this.question.wording}
-                                </p>
-                                {
-                                    this.constructImage()
-                                }
-                            </CardContent>
-                            <CardActions style={{marginTop: -30}}>
-                                <FormGroup>
-                                    {
-                                        this.constructAnswers()
-                                    }
-                                <Button variant="contained" style={{marginTop:5}}>Validate</Button>
-                                </FormGroup>
-                            </CardActions>
-                        </this.Card>
-                    </div>
-                </Draggable>
-            </Grid>
-        );
-    };
+	render() {
+		return (
+			<Grid item sm={5} md={4}>
+				<Draggable>
+					<div>
+						<this.Card>
+							<CardContent>
+								<h3>
+									{this.question.fallacy}
+								</h3>
+								<p>
+									{this.question.wording}
+								</p>
+								{
+									this.constructImage()
+								}
+							</CardContent>
+							<CardActions style={{ marginTop: -30 }}>
+								<FormGroup>
+									{
+										this.constructAnswers()
+									}
+									<Button variant="contained" style={{ marginTop: 5 }}>Validate</Button>
+								</FormGroup>
+							</CardActions>
+						</this.Card>
+					</div>
+				</Draggable>
+			</Grid>
+		);
+	};
 }
 
 export default QuestionCard
