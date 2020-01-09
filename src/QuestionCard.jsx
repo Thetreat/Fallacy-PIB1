@@ -38,7 +38,9 @@ class QuestionCard extends React.Component {
               },
             },
             checked: {},
-          })(props => <Checkbox color="default" {...props} />);
+        })(props => <Checkbox color="default" {...props} />);
+
+        this.userAnswer = [];
     }
 
     constructAnswers() {
@@ -46,7 +48,14 @@ class QuestionCard extends React.Component {
         var answers = [];
         this.question.answers.forEach(answer => {
             answers.push(<FormControlLabel control={
-                <this.Checkbox color="default" value={"checked"+"ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i]}/>
+                <this.Checkbox color="default" value={i} onChange={(event, isChecked) => {
+                    if (isChecked) {
+                        this.userAnswer.push(parseInt(event.target.value,10));
+                    } else {
+                        this.userAnswer.splice(this.userAnswer.indexOf(parseInt(event.target.value,10)),1);
+                    }
+                    this.userAnswer.sort();
+                }}/>
                 }
                 label={answer}
                 key={i}
