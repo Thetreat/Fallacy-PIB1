@@ -79,7 +79,7 @@ class QuestionCard extends React.Component {
 					<div>
 						<this.Card>
 							<CardContent>
-								<h3>
+								<h3 style={{marginTop: 0}}>
 									{this.question.fallacy}
 								</h3>
 								<p>

@@ -37,14 +37,14 @@ class FallacyPresentation extends React.Component {
 			<Grid item sm={5} md={4}>
 				<this.Card>
 					<CardContent>
-						<h3>
+						<h3 style={{marginTop: 0}}>
 							{this.props.name}
 						</h3>
 						<p>
 							{this.description}
 						</p>
 						<div>
-							<p style={{ "textDecoration": "underline" }}>Example :</p>
+							<p style={{ textDecoration: "underline" }}>Example :</p>
 							<p>{this.example}</p>
 						</div>
 					</CardContent>
