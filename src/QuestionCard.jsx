@@ -4,6 +4,9 @@ import CardContent from "@material-ui/core/CardContent"
 import { styled } from "@material-ui/core/styles"
 import { Grid, CardActions, Checkbox, FormGroup, FormControlLabel, Button, withStyles } from "@material-ui/core"
 
+import "./model/Question"
+import "./model/User"
+
 class QuestionCard extends React.Component {
 
 	constructor(props) {
@@ -20,7 +23,7 @@ class QuestionCard extends React.Component {
 				"Spider-Man was bitten by a spider. If a spider bites me, I will become Spider-Man."
 			],
 			solution: [0],
-			difficulty: 0.1
+			delta: 0.1
 		};
 
 		this.Card = styled(Card)({

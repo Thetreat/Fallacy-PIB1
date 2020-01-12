@@ -1,7 +1,13 @@
+@font-face{
+  font-family: "Parisienne";
+  src: url("../public/Parisienne-Regular.ttf");
+} 
+
 #title {
   text-align: center;
   margin-top: -10px;
-  font-family: ;
+  font-family: 'Parisienne';
+  font-size: 50px;
 }
 body {
   background-color: rgb(42, 43, 48);
@@ -47,4 +53,9 @@ body {
 
 .QuestionCard ul li {
   margin-top: 5px;
+}
+
+.PresImage {
+  width: 100%;
+  border-radius: 5px;
 }

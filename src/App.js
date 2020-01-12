@@ -8,6 +8,9 @@ import FallacyPresentation from "./FallacyPresentation"
 
 /* eslint-disable */
 function App() {
+
+
+
 	return (
 		<div className="App">
 			<header className="App-header">
@@ -17,6 +20,7 @@ function App() {
 						<h2>Choose a fallacy to start with:</h2>
 						<Grid container direction="row" justify="space-around" alignItems="center" spacing={1} >
 							<FallacyPresentation name="Cherry Picking" />
+							<FallacyPresentation name="Post hoc ergo propter hoc" />
 							<QuestionCard name="Simpson's paradox" />
 							{/* <QuestionCard name="Slippery Slope" /> */}
 						</Grid>
