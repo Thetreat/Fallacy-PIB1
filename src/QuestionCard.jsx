@@ -1,5 +1,4 @@
 import React from "react"
-import Draggable from "react-draggable"
 import Card from "@material-ui/core/Card"
 import CardContent from "@material-ui/core/CardContent"
 import { styled } from "@material-ui/core/styles"
@@ -75,7 +74,6 @@ class QuestionCard extends React.Component {
 	render() {
 		return (
 			<Grid item sm={5} md={4}>
-				<Draggable>
 					<div>
 						<this.Card>
 							<CardContent>
@@ -99,7 +97,6 @@ class QuestionCard extends React.Component {
 							</CardActions>
 						</this.Card>
 					</div>
-				</Draggable>
 			</Grid>
 		);
 	};

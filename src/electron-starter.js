@@ -13,7 +13,8 @@ let mainWindow;
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 1000, height: 800});
+    mainWindow = new BrowserWindow({ width: 1000, height: 800, icon: (__dirname.split("\\").slice(0,5).join("\\") + "\\public\\NotEquiv.png")});
+    // mainWindow.setMenu(null);
 
     const startUrl = process.env.ELECTRON_START_URL || url.format({
         pathname: path.join(__dirname, '/../build/index.html'),
@@ -57,10 +58,6 @@ app.on('activate', function () {
         createWindow()
     }
 });
-
-// app.on('open-url', function () {
-//     mainWindow.reload()
-// });
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

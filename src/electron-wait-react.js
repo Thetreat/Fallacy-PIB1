@@ -9,7 +9,7 @@ let startedElectron = false;
 const tryConnection = () => client.connect({port: port}, () => {
         client.end();
         if(!startedElectron) {
-            console.log('starting electron');
+            console.log('Starting Electron');
             startedElectron = true;
             const exec = require('child_process').exec;
             exec('npm run electron');

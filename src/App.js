@@ -12,7 +12,7 @@ function App() {
 		<div className="App">
 			<header className="App-header">
 				<div className="Body">
-					<h1 id="title">Fallacier</h1>
+					<h1 id="title">Not Equivalent</h1>
 					<div>
 						<h2>Choose a fallacy to start with:</h2>
 						<Grid container direction="row" justify="space-around" alignItems="center" spacing={1} >
