@@ -56,6 +56,9 @@ body {
 }
 
 .PresImage {
+  align-items: center;
   width: 100%;
   border-radius: 5px;
+  max-height: 400px;
+  max-width: 300px;
 }

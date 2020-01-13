@@ -1,10 +1,10 @@
-import React from "react"
-import { styled } from "@material-ui/core/styles"
-import Button from "@material-ui/core/Button"
-import Card from "@material-ui/core/Card"
-import CardContent from "@material-ui/core/CardContent"
-import CardActions from "@material-ui/core/CardActions"
-import { Grid } from "@material-ui/core"
+import React from "react";
+import { styled } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import { Grid } from "@material-ui/core";
 
 class FallacyPresentation extends React.Component {
 
@@ -28,7 +28,7 @@ class FallacyPresentation extends React.Component {
 
 	constructor(props) {
 		super(props);
-		// console.log(__filename + "/../public/")
+		this.name = this.props.name;
 		this.description = this.fallacyDesc[this.props.name].Description;
 		this.example = this.fallacyDesc[this.props.name].Example;
 
@@ -47,7 +47,7 @@ class FallacyPresentation extends React.Component {
 
 	constructImage() {
 		if (this.image !== "") {
-			return <img className="PresImage" src={window.location.origin + "/" + this.image} alt="About the example" />
+			return <img className="PresImage" src={window.location.origin + "/pres/" + this.image} alt="About the example" />
 		}
 	}
 
@@ -64,13 +64,13 @@ class FallacyPresentation extends React.Component {
 						</p>
 						<div>
 							<p style={{ textDecoration: "underline" }}>Example :</p>
-							{
-								this.constructImage()
-							}
+							<div style={{textAlign:"center"}}>
+								{this.constructImage()}
+							</div>
 							<p>{this.example}</p>
 						</div>
 					</CardContent>
-					<CardActions style={{ marginTop: -20 }}><Button variant="contained">Choose</Button></CardActions>
+					<CardActions style={{ marginTop: -20 }}><Button variant="contained" onClick={() =>{ window.location.pathname = "/" + this.name.replace(/ /g,"-")}}>Choose</Button></CardActions>
 				</this.Card>
 			</Grid>
 		)

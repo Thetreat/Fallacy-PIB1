@@ -70,7 +70,7 @@ class QuestionCard extends React.Component {
 
 	constructImage() {
 		if (this.question.image !== "") {
-			return <img src={this.question.image} alt="The problem" />
+			return <img src={window.location.origin + "/questions/" + this.question.image} alt="The problem" />
 		}
 	}
 

@@ -1,31 +1,33 @@
 import React from 'react';
 import './App.css';
 
-import Grid from "@material-ui/core/Grid"
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+  } from "react-router-dom";
 
 import QuestionCard from "./QuestionCard"
-import FallacyPresentation from "./FallacyPresentation"
+import Home from "./Home"
 
-/* eslint-disable */
 function App() {
-
-
-
 	return (
 		<div className="App">
 			<header className="App-header">
-				<div className="Body">
-					<h1 id="title">Not Equivalent</h1>
-					<div>
-						<h2>Choose a fallacy to start with:</h2>
-						<Grid container direction="row" justify="space-around" alignItems="center" spacing={1} >
-							<FallacyPresentation name="Cherry Picking" />
-							<FallacyPresentation name="Post hoc ergo propter hoc" />
-							<QuestionCard name="Simpson's paradox" />
-							{/* <QuestionCard name="Slippery Slope" /> */}
-						</Grid>
-					</div>
-				</div>
+			<Router>
+				<h1 id="title">Not Equivalent</h1>
+				<Switch>
+					<Route path="/Cherry-Picking">
+						<QuestionCard name="Cherry picking" />
+					</Route>
+					<Route path="/Post-hoc-propter-hoc">
+						<QuestionCard name="Post hoc ergo propter hoc" />
+					</Route>
+					<Route path="/">
+						<Home />
+					</Route>
+				</Switch>
+			</Router>
 			</header>
 		</div>
 	);
