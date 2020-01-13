@@ -12,7 +12,8 @@ class FallacyPresentation extends React.Component {
 		"Cherry Picking": {
 			Description: `Cherry picking is when you selectively pick out the evidence that backs up your point of view while disregarding the data that doesn’t.
             	For example is the above picture we can see that in order to get more vote one of the politician 
-            	purposefully selected the part of the curve showing that the unemployment was down.`,
+				purposefully selected the part of the curve showing that the unemployment was down.`,
+				Image:`CherryPicking.png`,
 			Example: `A classical example of a cherry picking fallacy: Global climate warming. 
             	Studying the last 20 years, we see not real augmentation in the global temperature, but looking at the last 100 years it is obvious.`
 		},

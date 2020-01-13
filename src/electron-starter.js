@@ -11,10 +11,14 @@ const url = require('url');
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+function getDirIndex() {
+    return __dirname.split('\\').indexOf("Fallacy-PIB1")+1;
+}
+
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({ width: 1000, height: 800, icon: (__dirname.split("\\").slice(0,5).join("\\") + "\\public\\NotEquiv.png")});
-    mainWindow.setMenu(null);
+    mainWindow = new BrowserWindow({ width: 1000, height: 800, icon: (__dirname.split("\\").slice(0,getDirIndex()).join("\\") + "\\public\\NotEquiv.png")});
+    // mainWindow.setMenu(null);
 
     const startUrl = process.env.ELECTRON_START_URL || url.format({
         pathname: path.join(__dirname, '/../build/index.html'),
