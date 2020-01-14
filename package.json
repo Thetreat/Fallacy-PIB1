@@ -10,6 +10,9 @@
   "dependencies": {
     "@material-ui/core": "^4.8.1",
     "@material-ui/icons": "^4.5.1",
+    "jquery": "^3.4.1",
+    "jquery-csv": "^1.0.8",
+    "papaparse": "^5.1.1",
     "react": "^16.8.0",
     "react-dnd": "^10.0.2",
     "react-dom": "^16.8.0",

@@ -4,7 +4,7 @@ const D = 1;
 class User {
     constructor(name){
         this.name = name;
-        this.theta = 0;
+        this.theta = -3;
     }
 
     estimateTheta(answerToQuestion) {
@@ -22,9 +22,9 @@ class User {
     }
     
 }
-// eslint-disable-next-line
-var denis = new User("Denis"); 
 
 function probS(theta, delta){
     return 1/(1+Math.exp(-D(theta - delta)));
 }
+
+export default User

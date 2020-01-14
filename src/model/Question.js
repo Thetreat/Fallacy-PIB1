@@ -33,9 +33,23 @@ function predictNextQuestion(user, j){
     return best;
 }
 
+function predictFirstQuestion(user, fallacy) {
+    var best = window.questionDataset[0];
+
+    window.questionDataset.forEach((question) => {
+        if (question.fallacy === fallacy && 
+            Math.abs(probS(user.theta, question.delta)-desiredSuccessRate) < Math.abs(probS(user.theta, best.delta)-desiredSuccessRate)){
+            best = question;
+        }
+    });
+    return best;
+}
+
 function probS(theta, delta){
     return 1/(1+Math.exp(-D(theta - delta)));
 }
 function checkAnswer(a1,a2) {
     return a1 === a2 ? true: false;
 }
+
+export {predictFirstQuestion, predictNextQuestion, probS, checkAnswer, changeQuestion}

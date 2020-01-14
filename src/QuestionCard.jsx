@@ -4,27 +4,20 @@ import CardContent from "@material-ui/core/CardContent"
 import { styled } from "@material-ui/core/styles"
 import { Grid, CardActions, Checkbox, FormGroup, FormControlLabel, Button, withStyles } from "@material-ui/core"
 
-import "./model/Question"
-import "./model/User"
+import {predictFirstQuestion} from "./model/Question"
+// import {} from "./model/User"
 
 class QuestionCard extends React.Component {
 
 	constructor(props) {
 		super(props);
-
-		this.question = {
-			id: 0,
-			fallacy: "Cherry Picking",
-			type: "txt",
-			wording: "Which one of these fallacies is a cherry picking ?",
-			image: "",
-			answers: ["Maxime said analysis classes are hard. I find mine hard too. Therefore all analysis classes must be hard.",
-				"I like chocolate donuts. Therefore all chocolate donuts are good.",
-				"Spider-Man was bitten by a spider. If a spider bites me, I will become Spider-Man."
-			],
-			solution: [0],
-			delta: 0.1
-		};
+		
+		if (this.props.hasOwnProperty("index")){
+			this.question = window.questionDataset[this.props.index];
+		} else {
+			this.question = predictFirstQuestion(window.user,props.name)
+			console.log(this.question)
+		}
 
 		this.Card = styled(Card)({
 			background: '#FF8E53 30%',
@@ -46,26 +39,30 @@ class QuestionCard extends React.Component {
     }
 
     constructAnswers() {
-        var i = 0;
-        var answers = [];
-        this.question.answers.forEach(answer => {
-            answers.push(<FormControlLabel control={
-                <this.Checkbox color="default" value={i} onChange={(event, isChecked) => {
-                    if (isChecked) {
-                        this.userAnswer.push(parseInt(event.target.value,10));
-                    } else {
-                        this.userAnswer.splice(this.userAnswer.indexOf(parseInt(event.target.value,10)),1);
-                    }
-                    this.userAnswer.sort();
-                }}/>
-                }
-                label={answer}
-                key={i}
-                style={{margin:5}}
-            />);
-            i++
-        });
-        return answers;
+		if (this.question.type === "txt"){
+			var i = 0;
+			var answers = [];
+			this.question.Answers.forEach(answer => {
+				answers.push(<FormControlLabel control={
+					<this.Checkbox color="default" value={i} onChange={(event, isChecked) => {
+						if (isChecked) {
+							this.userAnswer.push(parseInt(event.target.value,10));
+						} else {
+							this.userAnswer.splice(this.userAnswer.indexOf(parseInt(event.target.value,10)),1);
+						}
+						this.userAnswer.sort();
+					}}/>
+					}
+					label={answer}
+					key={i}
+					style={{margin:5}}
+				/>);
+				i++
+			});
+			return answers;
+		} else if (this.question.type === "img") {
+			
+		}
     }
 
 	constructImage() {
@@ -95,7 +92,11 @@ class QuestionCard extends React.Component {
 									{
 										this.constructAnswers()
 									}
-									<Button variant="contained" style={{ marginTop: 5 }}>Validate</Button>
+									<Button variant="contained" onClick={
+										() => {
+
+										}
+									} style={{ marginTop: 5 }}>Validate</Button>
 								</FormGroup>
 							</CardActions>
 						</this.Card>
