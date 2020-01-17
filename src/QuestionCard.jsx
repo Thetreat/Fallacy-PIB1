@@ -2,7 +2,7 @@ import React from "react"
 import Card from "@material-ui/core/Card"
 import CardContent from "@material-ui/core/CardContent"
 import { styled } from "@material-ui/core/styles"
-import { Grid, CardActions, Checkbox, FormGroup, FormControlLabel, Button, withStyles } from "@material-ui/core"
+import { Grid, CardActions, Checkbox, FormGroup, FormControlLabel, Button, withStyles, CardMedia } from "@material-ui/core"
 
 import {predictFirstQuestion} from "./model/Question"
 // import {} from "./model/User"
@@ -16,13 +16,17 @@ class QuestionCard extends React.Component {
 			this.question = window.questionDataset[this.props.index];
 		} else {
 			this.question = predictFirstQuestion(window.user,props.name)
-			console.log(this.question)
 		}
 
 		this.Card = styled(Card)({
+			position: "absolute",
+			top: "52%", left: "50%",
+			transform: "translate(-50%, -50%)",
 			background: '#FF8E53 30%',
 			borderRadius: 3,
 			color: 'white',
+			width: "min-content",
+			margin:20,
 		});
 
         this.Checkbox = withStyles({
@@ -38,8 +42,8 @@ class QuestionCard extends React.Component {
         this.userAnswer = [];
     }
 
-    constructAnswers() {
-		if (this.question.type === "txt"){
+	constructAnswers() {
+		if (this.question.Type === "txt"){
 			var i = 0;
 			var answers = [];
 			this.question.Answers.forEach(answer => {
@@ -60,47 +64,53 @@ class QuestionCard extends React.Component {
 				i++
 			});
 			return answers;
-		} else if (this.question.type === "img") {
-			
 		}
-    }
+	}
 
 	constructImage() {
 		if (this.question.image !== "") {
-			return <img src={window.location.origin + "/questions/" + this.question.image} alt="The problem" />
+			return <img style={{margin:20, borderRadius:5}} src={window.location.origin + "/questions/" + this.question.Image} alt="The problem"
+				onClick={
+					(e) => {
+						var rect = e.target.getBoundingClientRect();
+						console.log("X:" + (e.clientX - rect.x) + " Y:" + (e.clientY - rect.y));
+					}
+				}/>
 		}
 	}
 
 	render() {
 		return (
 			<Grid item sm={5} md={4}>
-					<div>
-						<this.Card>
-							<CardContent>
-								<h3 style={{marginTop: 0}}>
-									{this.question.fallacy}
-								</h3>
-								<p>
-									{this.question.wording}
-								</p>
+				<div>
+					<this.Card>
+						<CardMedia>
+						{
+							this.constructImage()
+						}
+						</CardMedia>
+						<CardContent style={{marginTop:-10}}>
+							<h3 style={{marginTop: 0}}>
+								{this.question.Fallacy}
+							</h3>
+							<p>
+								{this.question.Wording}
+							</p>
+						</CardContent>
+						<CardActions style={{ marginTop: -30 }}>
+							<FormGroup>
 								{
-									this.constructImage()
+									this.constructAnswers()
 								}
-							</CardContent>
-							<CardActions style={{ marginTop: -30 }}>
-								<FormGroup>
-									{
-										this.constructAnswers()
-									}
-									<Button variant="contained" onClick={
-										() => {
+								<Button variant="contained" onClick={
+									() => {
 
-										}
-									} style={{ marginTop: 5 }}>Validate</Button>
-								</FormGroup>
-							</CardActions>
-						</this.Card>
-					</div>
+									}
+								} style={{ marginTop: 5 }}>Validate</Button>
+							</FormGroup>
+						</CardActions>
+					</this.Card>
+				</div>
 			</Grid>
 		);
 	};
