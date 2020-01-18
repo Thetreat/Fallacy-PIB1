@@ -19,9 +19,9 @@ class QuestionCard extends React.Component {
 		}
 
 		this.Card = styled(Card)({
-			position: "absolute",
+			position: "relative",
 			top: "52%", left: "50%",
-			transform: "translate(-50%, -50%)",
+			transform: "translate(-50%)",
 			background: '#FF8E53 30%',
 			borderRadius: 3,
 			color: 'white',
