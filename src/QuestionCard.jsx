@@ -25,7 +25,7 @@ class QuestionCard extends React.Component {
 			background: '#FF8E53 30%',
 			borderRadius: 3,
 			color: 'white',
-			width: "min-content",
+			width: "fit-content",
 			margin:20,
 		});
 
@@ -68,14 +68,16 @@ class QuestionCard extends React.Component {
 	}
 
 	constructImage() {
-		if (this.question.image !== "") {
-			return <img style={{margin:20, borderRadius:5}} src={window.location.origin + "/questions/" + this.question.Image} alt="The problem"
-				onClick={
-					(e) => {
-						var rect = e.target.getBoundingClientRect();
-						console.log("X:" + (e.clientX - rect.x) + " Y:" + (e.clientY - rect.y));
-					}
-				}/>
+		if (this.question.Image !== "") {
+			return <CardMedia>
+					<img style={{ margin: 20, borderRadius: 5 }} src={window.location.origin + "/questions/" + this.question.Image} alt="The problem"
+					onClick={
+						(e) => {
+							var rect = e.target.getBoundingClientRect();
+							console.log("X:" + (e.clientX - rect.x) + " Y:" + (e.clientY - rect.y));
+						}
+					}/>
+				</CardMedia>
 		}
 	}
 
@@ -84,11 +86,11 @@ class QuestionCard extends React.Component {
 			<Grid item sm={5} md={4}>
 				<div>
 					<this.Card>
-						<CardMedia>
+						
 						{
 							this.constructImage()
 						}
-						</CardMedia>
+						
 						<CardContent style={{marginTop:-10}}>
 							<h3 style={{marginTop: 0}}>
 								{this.question.Fallacy}
