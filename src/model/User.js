@@ -1,5 +1,4 @@
-import "./Question"
-const D = 1;
+import { probS } from "./Question"
 
 class User {
     constructor(name){
@@ -17,14 +16,11 @@ class User {
                 newTheta *= (1-probS(this.theta - answer.question.delta))
             }
         });
-
         this.theta = newTheta
     }
-    
-}
-
-function probS(theta, delta){
-    return 1/(1+Math.exp(-D(theta - delta)));
+    toString() {
+        return this.name + " " + this.theta
+    }
 }
 
 export default User

@@ -1,12 +1,6 @@
-@font-face{
-  font-family: "Parisienne";
-  src: url("../public/Parisienne-Regular.ttf");
-} 
-
 #title {
   text-align: center;
   margin-top: -10px;
-  font-family: 'Parisienne';
   font-size: 50px;
 }
 body {
