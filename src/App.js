@@ -36,7 +36,12 @@ const CssTextField = withStyles({
 	},
 })(TextField);
 
-
+class Login extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = { isLoggedIn: false}
+	}
+}
 
 class App extends React.Component {
 	constructor(props) {
@@ -197,6 +202,8 @@ class App extends React.Component {
 			];
 		window.answerToQuestion = [];
 		window.appSession = this;
+
+		this.state = {isLoggedIn:false, };
 	} 
 
 	renderLog() {
@@ -237,7 +244,7 @@ class App extends React.Component {
 					</Typography>
 					<Grid container style={{flex:1}} justify="flex-end" alignItems="center">
 						{
-							this.renderLog()
+							
 						}
 					</Grid>
 				</Toolbar>
