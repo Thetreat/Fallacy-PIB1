@@ -9,7 +9,7 @@ import {
 
 import QuestionCard from "./QuestionCard";
 import Home from "./Home";
-import User from "./model/User";
+import User from "./model/User"
 import { Grid, IconButton, AppBar, Toolbar, Typography, TextField, Button, withStyles } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
@@ -40,6 +40,30 @@ class Login extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { isLoggedIn: false}
+	}
+	
+	render() {
+		if (this.state.isLoggedIn) {
+			return (<Grid item><Typography>You are logged in as {window.user.name}</Typography></Grid>);
+		} else {
+			
+			return (
+				[<Grid item key={0}>
+				<CssTextField label="User name" variant="outlined" id="loginText"/>
+				</Grid>,
+				<Grid item key={1}>
+				<Button color="inherit" onClick={() => {
+					window.name = document.getElementById("loginText").value;
+					if (localStorage.getItem(window.name) === null) {
+						localStorage.setItem(window.name, new User(window.name));
+					}
+					window.user = localStorage.getItem(window.name);
+					console.log(window.user.name)
+					this.setState({ isLoggedIn: true, });
+				}}>Login</Button>
+				</Grid>]
+			);
+		}
 	}
 }
 
@@ -202,32 +226,8 @@ class App extends React.Component {
 			];
 		window.answerToQuestion = [];
 		window.appSession = this;
-
-		this.state = {isLoggedIn:false, };
 	} 
 
-	renderLog() {
-		if (window.name !== undefined) {
-			return (
-				[<Grid item key={0}>
-				<CssTextField label="User name" variant="outlined" id="loginText"/>
-				</Grid>,
-				<Grid item key={1}>
-				<Button color="inherit" onClick={() => {
-					window.name = document.getElementById("loginText").value;
-					if (localStorage.getItem(window.name) === null) {
-					localStorage.setItem(window.name, new User(window.name));
-					}
-					window.user = localStorage.getItem(window.name);
-					console.log(window.user.name)
-					window.appSession.setState(() => { });
-				}}>Login</Button>
-				</Grid>]
-			);
-		} else {
-			return (<Grid item><Typography>You are logged in as {window.user.name}</Typography></Grid>);
-		}
-	}
 
 	render() {
 		return (
@@ -243,9 +243,7 @@ class App extends React.Component {
 					Fallacyer
 					</Typography>
 					<Grid container style={{flex:1}} justify="flex-end" alignItems="center">
-						{
-							
-						}
+						<Login></Login>
 					</Grid>
 				</Toolbar>
 				</AppBar>

@@ -18,9 +18,9 @@ class User {
         });
         this.theta = newTheta
     }
-    toString() {
-        return this.name + " " + this.theta
-    }
+    // toString() {
+    //     return this.name + " " + this.theta
+    // }
 }
 
 export default User
