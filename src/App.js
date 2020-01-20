@@ -155,7 +155,7 @@ class App extends React.Component {
 					"Type": "txt",
 					"Wording": "Complete this Cherry Picking fallacy :Interviewer : In your resume you say have quite the professional experience, have done a few stages abroad and are very motivated for this work.Alice : That's right Sir.Interviewer : ....",
 					"Image": "",
-					"Answers": ["Do you have anything you wish to add for this interview ?", "I spoke to your teacher. He said you were usually slacking off and have had trouble with others there. Mind telling me more ?", "Can you prove how motivated you are ?", "It's a shame you're a woman.", "Now get out."],
+					"Answers": ["Do you have anything you wish to add for this interview ?", "I spoke to your teacher. He said you were usually slacking off and have had trouble with others there. Mind telling me more ?", "Can you prove how motivated you are ?", "It's a shame you're a woman. Now get out."],
 					"Solution": [1],
 					"Delta": -1.2
 				},
@@ -192,7 +192,7 @@ class App extends React.Component {
 				{
 					"ID": "10",
 					"Fallacy": "Post Hoc Ergo Propter hoc",
-					"Type": "",
+					"Type": "txt",
 					"Wording": "Which one of these sentences is post hoc?",
 					"Image": "",
 					"Answers": "After drinking a glass of frog spit I got better from my cold, therefore frog spit is an efficient treatment against colds,I saw a black cat so now I have bad luck,I lost a football game so I need new sneakers",
@@ -202,7 +202,7 @@ class App extends React.Component {
 				{
 					"ID": "11",
 					"Fallacy": "Post Hoc Ergo Propter hoc",
-					"Type": "",
+					"Type": "txt",
 					"Wording": "Now look at this graph. You are a news anchor and you need some spicy information for the next broadcast. Use this graph to give realistic news to people who beleive whatever you say in a post hoc way. This graph shows that:",
 					"Image": "",
 					"Answers": "Ice cream sales are increased as a result of the increase of shark attacks,In the summer, people who eat ice cream are attacked by sharks,Shark attacks and ice cream sales have an important correlation rate,Ice cream protects you from being attacked by a shark",
@@ -212,7 +212,7 @@ class App extends React.Component {
 				{
 					"ID": "12",
 					"Fallacy": "Post Hoc Ergo Propter hoc",
-					"Type": "",
+					"Type": "txt",
 					"Wording": "Now back on the global warming topic we have this graph: This graph demonstrates that:",
 					"Image": "",
 					"Answers": "Becoming a Pirate helps fighting global warming,There’s a strong correlation between the two,The disparition of pirates is what causes global warming,You can’t deduce anything from it",
@@ -222,7 +222,7 @@ class App extends React.Component {
 				{
 					"ID": "13",
 					"Fallacy": "Post Hoc Ergo Propter hoc",
-					"Type": "",
+					"Type": "txt",
 					"Wording": "Is this a Post Hoc fallacy?“Blake broke a mirror and afterward his parents divorced, breaking the mirror is what lead to the divorce”",
 					"Image": "",
 					"Answers": "True,False",
@@ -232,7 +232,7 @@ class App extends React.Component {
 				{
 					"ID": "14",
 					"Fallacy": "Post Hoc Ergo Propter hoc",
-					"Type": "",
+					"Type": "txt",
 					"Wording": "Is this a Post Hoc fallacy?“Wen played a football game without his lucky jersey and that’s why his team lost”",
 					"Image": "",
 					"Answers": "True,False",

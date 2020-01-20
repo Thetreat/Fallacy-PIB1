@@ -74,20 +74,6 @@ class QuestionCard extends React.Component {
 		}
 	}
 
-	constructImage() {
-		if (this.state.question.Image !== "") {
-			return <CardMedia>
-					<img style={{ margin: 20, borderRadius: 5 }} src={window.location.origin + "/questions/" + this.state.question.Image} alt="The problem"
-					onClick={
-						(e) => {
-							var rect = e.target.getBoundingClientRect();
-							console.log("X:" + (e.clientX - rect.x) + " Y:" + (e.clientY - rect.y));
-						}
-					}/>
-				</CardMedia>
-		}
-	}
-
 	dispAnswer() {
 		if (this.state.answered) {
 			return "Next"
@@ -96,16 +82,44 @@ class QuestionCard extends React.Component {
 		}
 	}
 
+	// componentDidMount() {
+	// 	if(this.state.question.Image !== "") {
+	// 		var img = new Image();
+	// 	img.onload = function () {
+	// 		document.getElementById("canvas").getContext("2d").drawImage(img,0,0)
+	// 		document.getElementById("canvas").width=this.width
+	// 		document.getElementById("canvas").height=this.height
+	// 		}
+	// 		img.src = window.location.origin + "/questions/" + this.state.question.Image
+	// 	}
+	// }
+
 	render() {
 		return (
 			<Grid item sm={5} md={4}>
 				<div>
 					<this.Card>
 						
-						{
-							this.constructImage()
-						}
-						
+						{this.state.question.Image !== "" && <CardMedia>
+							<div onClick={
+							(e) => {
+								var rect = e.target.getBoundingClientRect();
+								this.userAnswer.push({ x: e.clientX - rect.x, y: e.clientY - rect.y });
+								if (this.userAnswer.length > this.state.question.Solution.length) {
+									this.userAnswer.shift();
+								}
+								console.log(this.userAnswer);
+								document.getElementById("canvas").getContext("2d").fillRect(this.userAnswer[this.userAnswer.length - 1].x,
+									this.userAnswer[this.userAnswer.length - 1].y,
+									3,3
+								)
+							}
+						}>
+						<canvas id="canvas" style={{position:"absolute", zIndex:"2"}} width={1000} height={1000}></canvas>
+						<img style={{position:"static", zIndex:"1"}} src={window.location.origin + "/questions/" + this.state.question.Image} alt="A Graph" id="Graph"/>
+						</div>
+					</CardMedia>}
+
 						<CardContent style={{marginTop:-10}}>
 							<h3 style={{marginTop: 0}}>
 								{this.state.question.Fallacy}
@@ -123,7 +137,7 @@ class QuestionCard extends React.Component {
 								<Button variant="contained" onClick={
 									() => {
 										if (this.state.answered) {
-											
+											this.userAnswer = [];
 											let win;
 											if (this.state.question.Type === "txt"){
 												if (this.userAnswer.toString() === this.state.question.Solution.toString()) {
@@ -134,8 +148,13 @@ class QuestionCard extends React.Component {
 											}
 											window.answerToQuestion.push({question:this.state.question, win:win})
 											estimateTheta()
-											this.setState({question:predictNextQuestion(this.state.question), answered: false})
+											this.setState({ question: predictNextQuestion(this.state.question), answered: false })
+											
+											// this.buildCanvas()
 										} else {
+											if (this.state.question.Type === "img") {
+												
+											}
 											this.setState({answered : true});
 										}
 									}
