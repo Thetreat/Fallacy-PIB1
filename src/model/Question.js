@@ -21,7 +21,7 @@ function predictNextQuestion(user, j){
     window.questionDataset.forEach((question) => {
         if (question !== j && 
             question.fallacy === j.fallacy && 
-            Math.abs(probS(user.theta, question.Delta)-desiredSuccessRate) < Math.abs(probS(user.theta, best.Delta)-desiredSuccessRate)){
+            Math.abs(probS(window.theta, question.Delta)-desiredSuccessRate) < Math.abs(probS(window.theta, best.Delta)-desiredSuccessRate)){
             best = question;
         }
     });
@@ -39,18 +39,14 @@ function predictFirstQuestion(user, fallacy) {
     })
 
     window.questionDataset.forEach((question) => {
-        console.log(question.Fallacy);
-        console.log(fallacy);
         if (
             question.Fallacy === fallacy && 
-            Math.abs(probS(user.theta, question.Delta) - desiredSuccessRate) < Math.abs(probS(user.theta, best.Delta) - desiredSuccessRate)
+            Math.abs(probS(window.theta, question.Delta) - desiredSuccessRate) < Math.abs(probS(window.theta, best.Delta) - desiredSuccessRate)
         )
         {
             best = question;
         }
-        console.log(probS(user.theta, question.Delta));
     });
-    console.log(best)
     return best;
 }
 
@@ -58,8 +54,16 @@ function probS(theta, Delta){
     const D = 1;
     return 1/(1+Math.exp(-D*(theta - Delta)));
 }
-function checkAnswer(a1,a2) {
-    return a1 === a2 ? true: false;
-}
+function estimateTheta(answerToQuestion) {
+    var newTheta = 1;
 
-export {predictFirstQuestion, predictNextQuestion, probS, checkAnswer, changeQuestion}
+    answerToQuestion.forEach(answer => {
+        if( answer.win ){
+            newTheta *= (probS(this.theta - answer.question.delta))
+        } else {
+            newTheta *= (1-probS(this.theta - answer.question.delta))
+        }
+    });
+    this.theta = newTheta
+}
+export {predictFirstQuestion, predictNextQuestion, probS, changeQuestion, estimateTheta}

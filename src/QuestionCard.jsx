@@ -13,9 +13,9 @@ class QuestionCard extends React.Component {
 		super(props);
 		
 		if (this.props.hasOwnProperty("index")){
-			this.question = window.questionDataset[this.props.index];
+			this.state = {question : window.questionDataset[this.props.index], answered: false};
 		} else {
-			this.question = predictFirstQuestion(window.user,props.name)
+			this.state = {question : predictFirstQuestion(window.user,props.name), answered: false};
 		}
 
 		this.Card = styled(Card)({
@@ -43,10 +43,10 @@ class QuestionCard extends React.Component {
     }
 
 	constructAnswers() {
-		if (this.question.Type === "txt"){
+		if (this.state.question.Type === "txt"){
 			var i = 0;
 			var answers = [];
-			this.question.Answers.forEach(answer => {
+			this.state.question.Answers.forEach(answer => {
 				answers.push(<FormControlLabel control={
 					<this.Checkbox color="default" value={i} onChange={(event, isChecked) => {
 						if (isChecked) {
@@ -68,9 +68,9 @@ class QuestionCard extends React.Component {
 	}
 
 	constructImage() {
-		if (this.question.Image !== "") {
+		if (this.state.question.Image !== "") {
 			return <CardMedia>
-					<img style={{ margin: 20, borderRadius: 5 }} src={window.location.origin + "/questions/" + this.question.Image} alt="The problem"
+					<img style={{ margin: 20, borderRadius: 5 }} src={window.location.origin + "/questions/" + this.state.question.Image} alt="The problem"
 					onClick={
 						(e) => {
 							var rect = e.target.getBoundingClientRect();
@@ -78,6 +78,14 @@ class QuestionCard extends React.Component {
 						}
 					}/>
 				</CardMedia>
+		}
+	}
+
+	dispAnswer() {
+		if (this.state.answered) {
+			return "Next"
+		} else {
+			return "Validate"
 		}
 	}
 
@@ -93,11 +101,12 @@ class QuestionCard extends React.Component {
 						
 						<CardContent style={{marginTop:-10}}>
 							<h3 style={{marginTop: 0}}>
-								{this.question.Fallacy}
+								{this.state.question.Fallacy}
 							</h3>
 							<p>
-								{this.question.Wording}
+								{this.state.question.Wording}
 							</p>
+							<p>{this.showAnswers}</p>
 						</CardContent>
 						<CardActions style={{ marginTop: -30 }}>
 							<FormGroup>
@@ -106,9 +115,20 @@ class QuestionCard extends React.Component {
 								}
 								<Button variant="contained" onClick={
 									() => {
-
+										if (this.state.question.Type === "txt"){
+											if (this.userAnswer.toString() === this.state.question.Solution.toString()) {
+												console.log("bien joué")
+											} else {
+												console.log("mal joué")
+											}
+										}
+										this.setState({answered : true});
 									}
-								} style={{ marginTop: 5 }}>Validate</Button>
+								} style={{ marginTop: 5 }}>
+									{
+										this.dispAnswer()
+									}
+								</Button>
 							</FormGroup>
 						</CardActions>
 					</this.Card>

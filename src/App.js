@@ -9,7 +9,6 @@ import {
 
 import QuestionCard from "./QuestionCard";
 import Home from "./Home";
-import User from "./model/User"
 import { Grid, IconButton, AppBar, Toolbar, Typography, TextField, Button, withStyles } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
@@ -39,26 +38,33 @@ const CssTextField = withStyles({
 class Login extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { isLoggedIn: false}
+		if (window.name) {
+			this.state = { isLoggedIn: true };
+			window.theta = parseFloat(localStorage.getItem(window.name));
+		} else {
+			this.state = { isLoggedIn: false};
+		}
 	}
-	
+
+	log() {		
+		window.name = document.getElementById("loginText").value;
+		if (localStorage.getItem(window.name) === null) {
+			localStorage.setItem(window.name, -3);
+		}
+		window.theta = parseFloat(localStorage.getItem(window.name));
+	}
+
 	render() {
 		if (this.state.isLoggedIn) {
-			return (<Grid item><Typography>You are logged in as {window.user.name}</Typography></Grid>);
+			return (<Grid item><Typography>You are logged in as {window.name}</Typography></Grid>);
 		} else {
-			
 			return (
 				[<Grid item key={0}>
 				<CssTextField label="User name" variant="outlined" id="loginText"/>
 				</Grid>,
 				<Grid item key={1}>
 				<Button color="inherit" onClick={() => {
-					window.name = document.getElementById("loginText").value;
-					if (localStorage.getItem(window.name) === null) {
-						localStorage.setItem(window.name, new User(window.name));
-					}
-					window.user = localStorage.getItem(window.name);
-					console.log(window.user.name)
+					this.log()
 					this.setState({ isLoggedIn: true, });
 				}}>Login</Button>
 				</Grid>]
