@@ -4,8 +4,7 @@ import CardContent from "@material-ui/core/CardContent"
 import { styled } from "@material-ui/core/styles"
 import { Grid, CardActions, Checkbox, FormGroup, FormControlLabel, Button, withStyles, CardMedia } from "@material-ui/core"
 
-import {predictFirstQuestion} from "./model/Question"
-// import {} from "./model/User"
+import { predictFirstQuestion, predictNextQuestion, estimateTheta } from "./model/Question"
 
 class QuestionCard extends React.Component {
 
@@ -15,7 +14,7 @@ class QuestionCard extends React.Component {
 		if (this.props.hasOwnProperty("index")){
 			this.state = {question : window.questionDataset[this.props.index], answered: false};
 		} else {
-			this.state = {question : predictFirstQuestion(window.user,props.name), answered: false};
+			this.state = {question : predictFirstQuestion(props.name), answered: false};
 		}
 
 		this.Card = styled(Card)({
@@ -39,14 +38,22 @@ class QuestionCard extends React.Component {
             checked: {},
         })(props => <Checkbox color="default" {...props} />);
 
-        this.userAnswer = [];
+		this.userAnswer = [];
     }
 
 	constructAnswers() {
 		if (this.state.question.Type === "txt"){
 			var i = 0;
 			var answers = [];
+			var color;
 			this.state.question.Answers.forEach(answer => {
+				if (this.state.answered && this.state.question.Solution.includes(i)) {
+					color = "#0F0"
+				} else if (this.state.answered && this.userAnswer.includes(i)) {
+					color = "#F00"
+				} else {
+					color = "#FFF"
+				}
 				answers.push(<FormControlLabel control={
 					<this.Checkbox color="default" value={i} onChange={(event, isChecked) => {
 						if (isChecked) {
@@ -59,7 +66,7 @@ class QuestionCard extends React.Component {
 					}
 					label={answer}
 					key={i}
-					style={{margin:5}}
+					style={{margin:5, color:color}}
 				/>);
 				i++
 			});
@@ -115,14 +122,22 @@ class QuestionCard extends React.Component {
 								}
 								<Button variant="contained" onClick={
 									() => {
-										if (this.state.question.Type === "txt"){
-											if (this.userAnswer.toString() === this.state.question.Solution.toString()) {
-												console.log("bien joué")
-											} else {
-												console.log("mal joué")
+										if (this.state.answered) {
+											
+											let win;
+											if (this.state.question.Type === "txt"){
+												if (this.userAnswer.toString() === this.state.question.Solution.toString()) {
+													win = true;
+												} else {
+													win = false;
+												}
 											}
+											window.answerToQuestion.push({question:this.state.question, win:win})
+											estimateTheta()
+											this.setState({question:predictNextQuestion(this.state.question), answered: false})
+										} else {
+											this.setState({answered : true});
 										}
-										this.setState({answered : true});
 									}
 								} style={{ marginTop: 5 }}>
 									{

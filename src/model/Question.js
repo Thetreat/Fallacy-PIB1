@@ -1,4 +1,5 @@
 const desiredSuccessRate = 0.75;
+const D = 1;
 
 function changeQuestion(user, j, win) {
     window.answerToQuestion.push({question: j, win: win});
@@ -15,7 +16,7 @@ function changeQuestion(user, j, win) {
     }
 }
 
-function predictNextQuestion(user, j){
+function predictNextQuestion(j){
     var best = window.questionDataset[0];
 
     window.questionDataset.forEach((question) => {
@@ -29,13 +30,12 @@ function predictNextQuestion(user, j){
     return best;
 }
 
-function predictFirstQuestion(user, fallacy) {
+function predictFirstQuestion(fallacy) {
     var best;
     window.questionDataset.forEach((question) => {
         if (question.Fallacy === fallacy) {
             best = question;
         }
-
     })
 
     window.questionDataset.forEach((question) => {
@@ -51,19 +51,21 @@ function predictFirstQuestion(user, fallacy) {
 }
 
 function probS(theta, Delta){
-    const D = 1;
+    console.log("prob " + 1/(1+Math.exp(-D*(theta - Delta))))
     return 1/(1+Math.exp(-D*(theta - Delta)));
 }
-function estimateTheta(answerToQuestion) {
+function estimateTheta() {
     var newTheta = 1;
 
-    answerToQuestion.forEach(answer => {
+    window.answerToQuestion.forEach(answer => {
         if( answer.win ){
-            newTheta *= (probS(this.theta - answer.question.delta))
+            newTheta *= (probS(window.theta - answer.question.Delta))
         } else {
-            newTheta *= (1-probS(this.theta - answer.question.delta))
+            newTheta *= (1-probS(window.theta - answer.question.Delta))
         }
     });
-    this.theta = newTheta
+    console.log("nTheta")
+    console.log(newTheta)
+    window.theta = newTheta
 }
 export {predictFirstQuestion, predictNextQuestion, probS, changeQuestion, estimateTheta}

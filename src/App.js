@@ -5,7 +5,7 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-  } from "react-router-dom";
+} from "react-router-dom";
 
 import QuestionCard from "./QuestionCard";
 import Home from "./Home";
@@ -46,7 +46,7 @@ class Login extends React.Component {
 		}
 	}
 
-	log() {		
+	logIn() {
 		window.name = document.getElementById("loginText").value;
 		if (localStorage.getItem(window.name) === null) {
 			localStorage.setItem(window.name, -3);
@@ -54,9 +54,19 @@ class Login extends React.Component {
 		window.theta = parseFloat(localStorage.getItem(window.name));
 	}
 
+	logOut() {
+		localStorage.setItem(window.name, window.theta);
+		window.theta = null;
+		window.name = null;
+	}
+
 	render() {
 		if (this.state.isLoggedIn) {
-			return (<Grid item><Typography>You are logged in as {window.name}</Typography></Grid>);
+			return ([<Grid item key={0}><Typography>You are logged in as {window.name}</Typography></Grid>,<Grid item key={1}>
+				<Button color="inherit" onClick={() => {
+					this.logOut()
+					this.setState({ isLoggedIn: false, });
+				}}>Logout</Button></Grid>]);
 		} else {
 			return (
 				[<Grid item key={0}>
@@ -64,7 +74,7 @@ class Login extends React.Component {
 				</Grid>,
 				<Grid item key={1}>
 				<Button color="inherit" onClick={() => {
-					this.log()
+					this.logIn()
 					this.setState({ isLoggedIn: true, });
 				}}>Login</Button>
 				</Grid>]
@@ -242,7 +252,7 @@ class App extends React.Component {
 				<Router>
 				<AppBar position="static" style={{background:"#FF8E53 30%"}} id="Appbar">
 					<Toolbar>
-					<IconButton edge="start" aria-label="back" onClick={()=>{window.location.pathname = "/"}}>
+					<IconButton edge="start" aria-label="back" onClick={()=>{ window.location.pathname = "/";}}>
 					<ArrowBackIcon style={{color:"#FFFFFF"}}/>
 					</IconButton>
 					<Typography variant="h6" style={{flex:1}}>
