@@ -82,17 +82,6 @@ class QuestionCard extends React.Component {
 		}
 	}
 
-	// componentDidMount() {
-	// 	if(this.state.question.Image !== "") {
-	// 		var img = new Image();
-	// 	img.onload = function () {
-	// 		document.getElementById("canvas").getContext("2d").drawImage(img,0,0)
-	// 		document.getElementById("canvas").width=this.width
-	// 		document.getElementById("canvas").height=this.height
-	// 		}
-	// 		img.src = window.location.origin + "/questions/" + this.state.question.Image
-	// 	}
-	// }
 
 	render() {
 		return (
@@ -103,20 +92,23 @@ class QuestionCard extends React.Component {
 						{this.state.question.Image !== "" && <CardMedia>
 							<div onClick={
 							(e) => {
+								document.getElementById("canvas").height = document.getElementById("Graph").height
+								document.getElementById("canvas").width = document.getElementById("Graph").width
 								var rect = e.target.getBoundingClientRect();
 								this.userAnswer.push({ x: e.clientX - rect.x, y: e.clientY - rect.y });
 								if (this.userAnswer.length > this.state.question.Solution.length) {
 									this.userAnswer.shift();
 								}
 								console.log(this.userAnswer);
-								document.getElementById("canvas").getContext("2d").fillRect(this.userAnswer[this.userAnswer.length - 1].x,
-									this.userAnswer[this.userAnswer.length - 1].y,
-									3,3
-								)
+								for (const point of this.userAnswer){
+									document.getElementById("canvas").getContext("2d").fillRect(point.x,point.y,
+										3,3
+									)
+								}
 							}
 						}>
-						<canvas id="canvas" style={{position:"absolute", zIndex:"2"}} width={1000} height={1000}></canvas>
-						<img style={{position:"static", zIndex:"1"}} src={window.location.origin + "/questions/" + this.state.question.Image} alt="A Graph" id="Graph"/>
+						<canvas id="canvas" style={{position:"absolute", zIndex:"1"}}></canvas>
+						<img src={window.location.origin + "/questions/" + this.state.question.Image} alt="A Graph" id="Graph"/>
 						</div>
 					</CardMedia>}
 
@@ -145,15 +137,39 @@ class QuestionCard extends React.Component {
 												} else {
 													win = false;
 												}
+											} else if (this.state.question.Type==="img") {
+												for (const point of this.userAnswer){
+												if (this.state.question.Solution[0].x-100 <point.x < this.state.question.Solution[0].x+100 && 
+													this.state.question.Solution[0].y-100 < point.y < this.state.question.Solution[0].y+100) {
+													win = true;
+												} else {
+													win = false;
+												}}
 											}
 											window.answerToQuestion.push({question:this.state.question, win:win})
 											estimateTheta()
 											this.setState({ question: predictNextQuestion(this.state.question), answered: false })
-											
-											// this.buildCanvas()
 										} else {
 											if (this.state.question.Type === "img") {
-												
+												document.getElementById("canvas").getContext("2d").fillStyle = "#00F";
+												for (const point of this.state.question.Solution){
+													document.getElementById("canvas").getContext("2d").fillRect(point.x,point.y,
+														5,5
+													)
+												}
+												for (const point of this.userAnswer){
+													if (this.state.question.Solution[0].x-100 <point.x < this.state.question.Solution[0].x+100 && 
+														this.state.question.Solution[0].y-100 < point.y < this.state.question.Solution[0].y+100) {
+														document.getElementById("canvas").getContext("2d").fillStyle = "#0F0"
+													// } else if (point.x && point.y) {
+													// 	document.getElementById("canvas").getContext("2d").fillStyle = "#0F0"
+													} else {
+														document.getElementById("canvas").getContext("2d").fillStyle = "#F00"
+													}
+													document.getElementById("canvas").getContext("2d").fillRect(point.x,point.y,
+														3,3
+													)
+												}
 											}
 											this.setState({answered : true});
 										}
